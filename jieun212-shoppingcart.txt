@@ -1,0 +1,20 @@
+Assignment name: Assignment 2 - shoppingcart
+TCSS 305: Programming Practicum, Winter 2016
+
+Name: Jieun Lee
+UWNetID: jieun212
+Subversion Revision Number: #
+
+Assignment Overview:
+The purpose of this assignment is to practice writing Java classes to a provided API and using Collections. The Graphical User Interface is provided for this assignment. Item, ItemOrder, and ShoppingCart classes should be created in model package and a test class for Item should be created in tests package. BigDecimal object should be used for prices. At the bottom of the GUI, there is a check box for a discount for customers who have a store membership. If the box is checked, the bulk pricing discount is applied to any items with bulk pricing. After getting the total cost of a shopping cart as a BigDecimal, the returned BigDecimal should have scale of 2 and use ROUND_HALF_EVEN rounding rule. Any method signatures or return types defined in this assignment must not be changed. Override toString() in these classes. Override equals() and hashCode() methods in Item class. Get throw IllegalArgument Exceptions for prices and quantities passes to class are less than 0, String passes to the class are empty. Also, get throw NullPointerExceptions for String, BigDecimal, Item, and ItemOrder passes to classes are null. No console output should appear when running the ShoppingMain program or when running unit tests. Follow stylistic guideline.
+
+Technical Impression:
+When I started writing Item class, I was wondering which one I should use, new BigDecimal("0.99") or BigDecimal.valueOf(0.99). I created a new project and a new class to test what those are different. The first one returned exact 0.00 and the second one returned big decimal such as 0.9900000000032. I used the second one for the price and I used setScale of 2. It worked. However, I wanted know the difference of them. I asked the professor and I got the answer that if I want to get big decimal, then I can pick the second one, but for this assignment, we need only two decimal for US currency, so I don't need to get big decimal value. So I changed all the BigDecimal.valueOf() to new BigDecimal("0.00") in the Item, ShoppingCart, and the unit test class. 
+For ShoppingCart class, I create two private instance fields. For the myOrder field, I used a List<ItemOrder> (ArrayList<ItemOrder>) Java Collections Framework to store information about all the Items the customer has ordered. The other field is declared to store true or false value if this shopping cart has membership and it has false value as a default. In calculateTotal() method, I declared a total variable as a BigDecimal to hold the cost of this shopping cart and set the value as zero. This method also goes through all the indexes of the ArrayList<ItemOrder>. I set the BigDecimal the quantity of the item, single item price and subTotal because those variables would use several times in this method. I didn't want long line, so I set a lot of variables. I was wondering whether or not it was fine even if I wouldn't use the variables again. I knew that if I would use the data again, I can set the data, but for good looking, I was not sure. However, I got clear answer now. If I don't use a data again, I don't need to set the data and I can have white space. When I get auto format, I got warning that said ''.'' is preceded with whitespace.' To avoid the warning, I moved the dot to the end of the line and I finally get no warning for the format.
+For test class for Item class, I struggled with the not covering equal method. I got wrong assertion. Through creating a unit test class, I learned that I should have used a proper assertion. Before got clear concept, I used assertSame and assertNotSame to test equality of two values. It caused that my tests didn't covers all the methods in the Item class. I learned that if I expected test value and the other value are equal, I needed to use assertEqual. However, if I expect that the equality of those two values are not true, then I need to use assertFalse(test.equals(theOther)).
+
+Unresolved problems in my submission:
+none
+
+Questions:
+none
